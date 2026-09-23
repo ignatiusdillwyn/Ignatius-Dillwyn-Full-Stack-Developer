@@ -2,17 +2,6 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    // Cek dulu, buat enum kalau belum ada
-    await queryInterface.sequelize.query(`
-      DO $$ BEGIN
-        CREATE TYPE "enum_Applications_status" AS ENUM (
-          'Applied', 'Reviewing', 'Shortlisted', 'Rejected', 'Accepted'
-        );
-      EXCEPTION
-        WHEN duplicate_object THEN null;
-      END $$;
-    `);
-
     await queryInterface.createTable('Applications', {
       id: {
         allowNull: false,
@@ -41,8 +30,9 @@ module.exports = {
         onDelete: 'CASCADE'
       },
       status: {
-        type: '"enum_Applications_status"', // pakai tanda kutip karena PostgreSQL case-sensitive
+        type: Sequelize.ENUM('Applied', 'Reviewing', 'Shortlisted', 'Rejected', 'Accepted'),
         allowNull: false,
+        defaultValue: 'Applied',   // ← opsional, tapi recommended
       },
       createdAt: {
         allowNull: false,
@@ -57,8 +47,5 @@ module.exports = {
 
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Applications');
-    await queryInterface.sequelize.query(
-      `DROP TYPE IF EXISTS "enum_Applications_status";`
-    );
   }
 };

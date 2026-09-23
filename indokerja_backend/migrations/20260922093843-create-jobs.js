@@ -2,17 +2,6 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    // Cek dulu, buat kalau belum ada
-    await queryInterface.sequelize.query(`
-      DO $$ BEGIN
-        CREATE TYPE "enum_Jobs_job_type" AS ENUM (
-          'Full-time', 'Part-time', 'Contract'
-        );
-      EXCEPTION
-        WHEN duplicate_object THEN null;
-      END $$;
-    `);
-
     await queryInterface.createTable('Jobs', {
       id: {
         allowNull: false,
@@ -51,7 +40,7 @@ module.exports = {
         allowNull: false,
       },
       job_type: {
-        type: '"enum_Jobs_job_type"',
+        type: Sequelize.ENUM('Full-time', 'Part-time', 'Contract'),
         allowNull: false,
       },
       createdAt: {
@@ -67,8 +56,5 @@ module.exports = {
 
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Jobs');
-    await queryInterface.sequelize.query(
-      `DROP TYPE IF EXISTS "enum_Jobs_job_type";`
-    );
   }
 };
