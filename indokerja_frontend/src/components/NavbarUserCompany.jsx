@@ -27,16 +27,6 @@ const NavbarUserCompany = () => {
           <FaBook />
           Applications
         </NavLink>
-
-        <NavLink to="/about" className={navClass}>
-          <FaInfoCircle />
-          About
-        </NavLink>
-
-        <NavLink to="/contact" className={navClass}>
-          <FaPhoneAlt />
-          Profile
-        </NavLink>
       </div>
 
       {/* RIGHT - LOGOUT */}

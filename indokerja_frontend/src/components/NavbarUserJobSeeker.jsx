@@ -18,11 +18,6 @@ const NavbarUserJobSeeker = () => {
 
       {/* CENTER - MENU */}
       <div className="flex gap-4 flex-1 justify-center">
-        {/* <NavLink to="/participant/home" className={navClass}>
-          <FaBook />
-          Home
-        </NavLink> */}
-
         <NavLink to="/jobseeker/job-list" className={navClass}>
           <FaBook />
           Jobs
@@ -31,11 +26,6 @@ const NavbarUserJobSeeker = () => {
         <NavLink to="/jobseeker/application-history" className={navClass}>
           <FaInfoCircle />
           Application History
-        </NavLink>
-
-        <NavLink to="/contact" className={navClass}>
-          <FaPhoneAlt />
-          Profile
         </NavLink>
       </div>
 
