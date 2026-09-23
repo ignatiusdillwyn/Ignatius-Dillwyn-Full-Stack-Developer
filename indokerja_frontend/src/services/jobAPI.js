@@ -22,6 +22,16 @@ const fetchAllJobs = async (token) => {
     return response.data; 
 };
 
+const fetchAllJobsByCompanyUserId = async (token) => {
+    const response = await axios.get(`${URL}/getAllByUserCompanyId`, {
+        headers: {
+            'Content-Type': 'application/json',
+            'access_token': token
+        }
+    });
+    return response.data; 
+};
+
 const fetchJobById = async (id, token) => {
     const response = await axios.get(`${URL}/getById/${id}`, {
         headers: {
@@ -36,4 +46,5 @@ export {
     addJob,
     fetchAllJobs,
     fetchJobById,
+    fetchAllJobsByCompanyUserId
 };

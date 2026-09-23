@@ -60,6 +60,26 @@ class JobController {
     }
   }
 
+  static async getAllJobsByUserCompanyId(req, res) {
+    try {
+      let user_company_id = req.userData.id;
+      const jobs = await sequelize.query(`
+        select * from Jobs j
+        where j.user_company_id = :user_company_id;
+      `, {
+        replacements: { user_company_id: user_company_id },
+        type: Sequelize.QueryTypes.SELECT
+      });
+      res.status(201).json({
+        status: 201,
+        message: "Get all jobs by user company id successfully",
+        data: jobs
+      });
+    } catch (error) {
+      res.status(400).json({ message: error.message });
+    }
+  }
+
   static async getJobById(req, res) {
     try {
       const job = await Jobs.findByPk(req.params.id);
