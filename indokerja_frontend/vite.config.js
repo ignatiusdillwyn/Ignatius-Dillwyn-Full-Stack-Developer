@@ -5,7 +5,6 @@ import tailwindcss from "@tailwindcss/vite"
 export default defineConfig({
   // TAMBAHKAN BARIS INI:
   base: '/', 
-  
   plugins: [
     react(),
     tailwindcss(),

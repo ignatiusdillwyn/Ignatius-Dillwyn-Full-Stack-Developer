@@ -12,7 +12,7 @@ class ApplicationsController {
 
       let data = null
       data = await sequelize.query(`
-        select * from "Applications" a 
+        select * from Applications a 
         where job_id = :job_id and user_jobseeker_id = :user_jobseeker_id;
         `, {
         replacements: { job_id: job_id, user_jobseeker_id: user_jobseeker_id },
@@ -27,7 +27,7 @@ class ApplicationsController {
       }
 
       let dataJob = await sequelize.query(`
-        select * from "Jobs" j 
+        select * from Jobs j 
         where id = :id
         `, {
         replacements: { id: job_id },
@@ -108,6 +108,13 @@ class ApplicationsController {
     try {
       // let user_jobseeker_id = req.userData.id;
       let application = await Applications.findByPk(req.params.id);
+
+      if(application === null) {
+        return res.status(404).json({
+          status: 404,
+          message: "Application not found",
+        });
+      }
 
       res.status(201).json({
         status: 201,
