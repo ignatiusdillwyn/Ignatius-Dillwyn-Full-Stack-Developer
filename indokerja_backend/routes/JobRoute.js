@@ -13,6 +13,11 @@ jobRouter.get(
   JobController.getAllJobs
 );
 jobRouter.get(
+  "/getAllByUserCompanyId",
+  authentication,
+  JobController.getAllJobsByUserCompanyId
+);
+jobRouter.get(
   "/getById/:id", 
   authentication,
   JobController.getJobById
