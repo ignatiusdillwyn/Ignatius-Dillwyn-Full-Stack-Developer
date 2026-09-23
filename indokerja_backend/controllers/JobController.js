@@ -7,6 +7,7 @@ const { tokenGeneratorUserJobSeeker } = require("../helpers/jwt");
 class JobController {
   static async addJob(req, res) {
     try {
+      console.log('test')
       let { job_title, location, salary, job_type, job_description } = req.body;
       let user_company_id = req.userData.id;
 
